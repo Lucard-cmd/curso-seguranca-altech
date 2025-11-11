@@ -5,130 +5,343 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Curso de Segurança da Informação - Altech IT Services</title>
   <style>
-    body {font-family: Arial, sans-serif; margin:0; background:#0d1117; color:#fff;}
-    header {background:#0d6efd; padding:20px; text-align:center;}
-    header h1 {margin:0; font-size:1.8em;}
-    header p {margin-top:5px; color:#e0e0e0;}
-    nav {position:fixed; top:0; width:100%; background:#000; padding:10px 0; text-align:center; z-index:100;}
-    nav a {color:white; margin:0 15px; text-decoration:none; font-weight:bold;}
-    section {padding:60px 20px; max-width:800px; margin:auto;}
-    h2 {color:#0d6efd;}
-    .module {margin-bottom:40px;}
-    button {background:#0d6efd; color:white; border:none; padding:10px 20px; border-radius:6px; cursor:pointer;}
-    button:hover {background:#0b5ed7;}
-    footer {background:#000; color:#ccc; text-align:center; padding:20px;}
-    .quiz {background:#161b22; padding:20px; border-radius:10px;}
-    .quiz p {margin-bottom:10px;}
-    #topBtn {position:fixed; bottom:20px; right:20px; background:#0d6efd; color:white; border:none; border-radius:50%; width:45px; height:45px; font-size:20px; cursor:pointer; display:none;}
-    #topBtn:hover {background:#0b5ed7;}
-    .logo {max-width:120px; margin-bottom:10px;}
+    :root {
+      --primary:#2563eb;
+      --primary-dark:#1d4ed8;
+      --bg-overlay:rgba(6,10,20,0.92);
+      --card-bg:rgba(15,23,42,0.9);
+      --accent:#22c55e;
+      --danger:#ef4444;
+    }
+    *{box-sizing:border-box;}
+    body {
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      color:#f9fafb;
+      background:url('fundo.jpg') no-repeat center center fixed;
+      background-size:cover;
+    }
+    .overlay {
+      min-height:100vh;
+      background:var(--bg-overlay);
+    }
+    nav {
+      position:fixed;
+      top:0;left:0;right:0;
+      display:flex;
+      justify-content:center;
+      gap:18px;
+      padding:10px 20px;
+      background:rgba(15,23,42,0.9);
+      backdrop-filter:blur(10px);
+      z-index:1000;
+    }
+    nav a {
+      color:#e5e7eb;
+      text-decoration:none;
+      font-weight:bold;
+      font-size:0.9rem;
+    }
+    nav a:hover {color:#fff;}
+    #progress-container{
+      position:fixed;top:46px;left:0;right:0;height:4px;
+      background:rgba(15,23,42,0.9);z-index:999;
+    }
+    #progress-bar{
+      height:4px;width:0;background:linear-gradient(90deg,var(--primary),#38bdf8);
+      transition:width .15s ease-out;
+    }
+    header.hero{
+      padding:110px 20px 60px;
+      text-align:center;
+    }
+    .hero-inner{
+      max-width:900px;margin:0 auto;
+      background:linear-gradient(135deg,rgba(37,99,235,0.25),rgba(15,23,42,0.95));
+      border-radius:24px;
+      padding:30px 20px 40px;
+      box-shadow:0 20px 40px rgba(0,0,0,0.45);
+    }
+    .logo{max-width:160px;margin-bottom:10px;}
+    .hero h1{margin:0 0 10px;font-size:2rem;}
+    .hero p{margin:0 0 20px;color:#e5e7eb;}
+    .cta-buttons{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:10px;}
+    button.primary, .btn-primary{
+      background:var(--primary);
+      border:none;color:white;
+      padding:10px 22px;border-radius:999px;
+      cursor:pointer;font-weight:bold;font-size:0.95rem;
+    }
+    button.primary:hover,.btn-primary:hover{background:var(--primary-dark);}
+    .btn-ghost{
+      background:transparent;border:1px solid #64748b;
+      color:#e5e7eb;border-radius:999px;padding:9px 20px;
+      cursor:pointer;font-size:0.9rem;
+    }
+
+    section{max-width:1000px;margin:0 auto 40px;padding:0 20px;}
+    section h2{color:#bfdbfe;margin-bottom:10px;}
+    .section-card{
+      background:var(--card-bg);
+      border-radius:18px;padding:20px 18px;margin-top:10px;
+      box-shadow:0 12px 24px rgba(0,0,0,0.45);
+    }
+    .section-card p{color:#e5e7eb;}
+
+    .threat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-top:15px;}
+    .threat-card{
+      background:rgba(15,23,42,0.95);
+      border-radius:16px;padding:14px 12px;font-size:0.9rem;
+      border:1px solid rgba(148,163,184,0.3);
+    }
+    .threat-card h3{margin-top:0;margin-bottom:5px;font-size:1rem;}
+    .threat-card span{font-size:1.4rem;margin-right:4px;}
+
+    .module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:15px;}
+    .module-card{background:rgba(15,23,42,0.95);border-radius:18px;padding:16px 14px;border:1px solid rgba(148,163,184,0.35);font-size:0.9rem;}
+    .module-tag{font-size:0.75rem;text-transform:uppercase;letter-spacing:.1em;color:#93c5fd;margin-bottom:4px;}
+
+    .quiz{background:var(--card-bg);border-radius:18px;padding:18px 16px;margin-top:10px;}
+    .quiz p{margin-bottom:6px;}
+    .quiz-question{margin-bottom:14px;}
+    .quiz-result{margin-top:10px;font-weight:bold;}
+
+    #topBtn {position:fixed; bottom:20px; right:20px; background:var(--primary); color:white; border:none; border-radius:50%; width:46px; height:46px; font-size:22px; cursor:pointer; display:none; box-shadow:0 10px 25px rgba(0,0,0,0.5);} 
+    #topBtn:hover {background:var(--primary-dark);} 
+
+    footer{background:rgba(15,23,42,0.98);padding:20px;text-align:center;color:#9ca3af;margin-top:40px;}
+    footer a{color:#60a5fa;text-decoration:none;}
+
+    .conclusao{background:rgba(22,163,74,0.15);border:1px solid rgba(34,197,94,0.5);color:#bbf7d0;padding:16px;border-radius:14px;margin-top:10px;display:none;}
+
+    @media (max-width:600px){
+      header.hero{padding-top:100px;}
+      .hero h1{font-size:1.5rem;}
+    }
   </style>
 </head>
 <body>
+<div class="overlay">
   <nav>
     <a href="#intro">Início</a>
+    <a href="#sobre">Por que se proteger?</a>
+    <a href="#agentes">Ameaças</a>
     <a href="#modulos">Módulos</a>
     <a href="#quiz">Quiz</a>
     <a href="#registro">Registro</a>
   </nav>
+  <div id="progress-container"><div id="progress-bar"></div></div>
 
-  <header id="intro">
-    <img src="altech_logo.png" alt="Logo Altech IT Services" class="logo" />
-    <h1>Curso Gratuito – Segurança da Informação e Conscientização Digital</h1>
-    <p>Aprenda a proteger seus dados e evitar golpes online.</p>
+  <header id="intro" class="hero">
+    <div class="hero-inner">
+      <img src="altech_logo.png" alt="Logo Altech IT Services" class="logo" />
+      <h1>Segurança da Informação e Conscientização Digital</h1>
+      <p>Um curso gratuito da <strong>Altech IT Services</strong> para ajudar você a proteger seus dados, sua privacidade e seu dinheiro no mundo digital.</p>
+      <div class="cta-buttons">
+        <a href="#modulos"><button class="primary">Começar o curso</button></a>
+        <a href="#registro"><button class="btn-ghost">Registrar participação</button></a>
+      </div>
+    </div>
   </header>
 
+  <section id="sobre">
+    <h2>Por que é tão importante se proteger digitalmente?</h2>
+    <div class="section-card">
+      <p>Quase tudo hoje passa por alguma tela: trabalho, estudos, banco, compras, conversa com a família. Essa facilidade também abre espaço para golpes, fraudes e vazamentos de dados. Um simples clique em um link errado pode expor senhas, documentos e até o seu dinheiro.</p>
+      <p>Segurança da informação não é só assunto de grandes empresas. É sobre você, suas fotos, suas conversas, seus dados pessoais e sua reputação. Quanto mais você entende os riscos e as boas práticas, mais preparado fica para dizer: <strong>"comigo não"</strong> aos golpistas digitais.</p>
+    </div>
+  </section>
+
+  <section id="agentes">
+    <h2>Principais ameaças e como elas agem</h2>
+    <div class="section-card">
+      <p>A seguir, alguns dos "vilões" mais comuns da segurança digital. Entender como eles funcionam é o primeiro passo para se proteger.</p>
+      <div class="threat-grid">
+        <div class="threat-card">
+          <h3><span>🦠</span>Vírus</h3>
+          <p>Programas maliciosos que infectam arquivos e sistemas, geralmente dependem da ação do usuário (como abrir um anexo) para se espalhar.</p>
+          <p><strong>Exemplo:</strong> Vírus que vem escondido em anexos de e-mail com nomes como "nota fiscal" ou "currículo".</p>
+        </div>
+        <div class="threat-card">
+          <h3><span>🐍</span>Worms</h3>
+          <p>Semelhantes a vírus, mas conseguem se espalhar automaticamente pela rede, explorando falhas de segurança em máquinas conectadas.</p>
+          <p><strong>Risco:</strong> Podem derrubar redes inteiras e consumir muitos recursos.</p>
+        </div>
+        <div class="threat-card">
+          <h3><span>🎭</span>Trojan (Cavalo de Troia)</h3>
+          <p>Se disfarça de programa legítimo (jogo, app, atualização) para enganar o usuário e, após ser instalado, abre portas para invasões.</p>
+          <p><strong>Exemplo:</strong> "App de limpeza milagroso" que, na verdade, rouba senhas.</p>
+        </div>
+        <div class="threat-card">
+          <h3><span>💣</span>Ransomware</h3>
+          <p>Tipo de malware que criptografa os arquivos da vítima e exige pagamento (resgate) para liberar o acesso novamente.</p>
+          <p><strong>Impacto:</strong> Pode paralisar empresas inteiras e apagar memórias importantes.</p>
+        </div>
+        <div class="threat-card">
+          <h3><span>📨</span>Phishing</h3>
+          <p>Golpe que tenta enganar o usuário se passando por banco, empresa ou pessoa conhecida, pedindo dados, senhas ou cliques em links falsos.</p>
+          <p><strong>Sinal de alerta:</strong> Pressa, ameaças e mensagens "bom demais pra ser verdade".</p>
+        </div>
+        <div class="threat-card">
+          <h3><span>🧠</span>Engenharia Social</h3>
+          <p>Manipulação psicológica. O golpista usa informação sobre você e se passa por alguém de confiança para fazer você mesmo entregar seus dados.</p>
+          <p><strong>Exemplo:</strong> Golpe do falso funcionário de banco ou suporte técnico.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="modulos">
-    <h2>Módulo 1 – Introdução à Segurança da Informação</h2>
-    <p>Segurança da informação é o conjunto de práticas que protegem dados e sistemas contra acessos não autorizados. A base dela é a tríade: confidencialidade, integridade e disponibilidade.</p>
-    <ul>
-      <li>🔐 Confidencialidade: apenas pessoas autorizadas acessam as informações.</li>
-      <li>⚙️ Integridade: os dados permanecem corretos e não são alterados indevidamente.</li>
-      <li>🕒 Disponibilidade: as informações estão acessíveis quando necessário.</li>
-    </ul>
-
-    <h2>Módulo 2 – Entendendo a LGPD</h2>
-    <p>A LGPD (Lei Geral de Proteção de Dados) garante que empresas e órgãos tratem seus dados pessoais com responsabilidade e transparência. Ela assegura direitos ao cidadão e define deveres às organizações.</p>
-    <ul>
-      <li>📜 Direito de saber como seus dados são usados.</li>
-      <li>🧾 Direito de solicitar exclusão ou correção de dados.</li>
-      <li>🏢 Responsabilidade das empresas no tratamento dos dados.</li>
-    </ul>
-
-    <h2>Módulo 3 – Golpes Digitais e Como se Proteger</h2>
-    <p>Golpes digitais estão cada vez mais comuns. Saber identificá-los é essencial para se proteger.</p>
-    <ul>
-      <li>⚠️ Cuidado com mensagens falsas no WhatsApp pedindo dinheiro.</li>
-      <li>📧 Desconfie de e-mails com links ou anexos desconhecidos.</li>
-      <li>💳 Nunca compartilhe senhas ou códigos de verificação.</li>
-    </ul>
-
-    <h2>Módulo 4 – Boas Práticas no Dia a Dia</h2>
-    <p>Adotar bons hábitos digitais reduz muito os riscos de invasões e fraudes.</p>
-    <ul>
-      <li>🔑 Use senhas fortes e ative a verificação em duas etapas.</li>
-      <li>🖥️ Mantenha seu sistema e antivírus atualizados.</li>
-      <li>🚫 Evite redes Wi-Fi públicas para acessar contas sensíveis.</li>
-    </ul>
-
-    <h2>Módulo 5 – Ferramentas e Dicas de Proteção</h2>
-    <p>Utilize ferramentas e boas práticas para aumentar sua segurança online.</p>
-    <ul>
-      <li>🧩 Use gerenciadores de senha (como Bitwarden ou 1Password).</li>
-      <li>🔍 Ative alertas de login em contas importantes.</li>
-      <li>☁️ Faça backups regulares de seus arquivos.</li>
-    </ul>
+    <h2>Módulos do curso</h2>
+    <div class="section-card">
+      <div class="module-grid">
+        <div class="module-card">
+          <div class="module-tag">Módulo 1</div>
+          <h3>Fundamentos da Segurança da Informação</h3>
+          <p>Entenda a tríade <strong>Confidencialidade, Integridade e Disponibilidade</strong>, exemplos práticos e como esses conceitos aparecem no seu dia a dia.</p>
+        </div>
+        <div class="module-card">
+          <div class="module-tag">Módulo 2</div>
+          <h3>LGPD na prática</h3>
+          <p>O que é a Lei Geral de Proteção de Dados, quais são os seus direitos como titular e como empresas devem tratar as suas informações.</p>
+        </div>
+        <div class="module-card">
+          <div class="module-tag">Módulo 3</div>
+          <h3>Senhas e Autenticação</h3>
+          <p>Como criar senhas fortes, usar gerenciadores de senha e a importância da autenticação em dois fatores.</p>
+        </div>
+        <div class="module-card">
+          <div class="module-tag">Módulo 4</div>
+          <h3>Golpes Online e Navegação Segura</h3>
+          <p>Principais golpes em e-mail, WhatsApp, redes sociais e QR Codes. Como identificar sinais de alerta antes de clicar.</p>
+        </div>
+        <div class="module-card">
+          <div class="module-tag">Módulo 5</div>
+          <h3>Backup, Nuvem e Dispositivos</h3>
+          <p>Boas práticas para armazenar seus arquivos, configurar backups e proteger computadores e celulares.</p>
+        </div>
+        <div class="module-card">
+          <div class="module-tag">Módulo 6</div>
+          <h3>Responsabilidade Digital</h3>
+          <p>Uso ético da tecnologia, cuidado com fake news, exposição de terceiros e como ser um bom cidadão digital.</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section id="quiz">
-    <h2>Quiz – Teste seu Conhecimento</h2>
+    <h2>Quiz – Teste seu conhecimento</h2>
     <div class="quiz">
-      <p><strong>1.</strong> O que significa LGPD?</p>
-      <input type="radio" name="q1"> Lei Geral de Proteção de Dados<br>
-      <input type="radio" name="q1"> Lei Governamental de Privacidade Digital<br>
-      <input type="radio" name="q1"> Legislação Geral de Proteção Digital<br><br>
-
-      <p><strong>2.</strong> Qual destas ações aumenta sua segurança digital?</p>
-      <input type="radio" name="q2"> Usar a mesma senha em todos os sites<br>
-      <input type="radio" name="q2"> Compartilhar códigos de verificação<br>
-      <input type="radio" name="q2"> Ativar autenticação em dois fatores<br><br>
-
-      <p><strong>3.</strong> O que fazer ao receber uma mensagem suspeita?</p>
-      <input type="radio" name="q3"> Clicar no link para verificar<br>
-      <input type="radio" name="q3"> Ignorar e denunciar como spam<br>
-      <input type="radio" name="q3"> Responder pedindo mais informações<br><br>
+      <div class="quiz-question">
+        <p><strong>1.</strong> O que significa LGPD?</p>
+        <label><input type="radio" name="q1" value="a"> Lei Geral de Proteção de Dados</label><br>
+        <label><input type="radio" name="q1" value="b"> Lei Governamental de Privacidade Digital</label><br>
+        <label><input type="radio" name="q1" value="c"> Legislação Global de Proteção de Dados</label>
+      </div>
+      <div class="quiz-question">
+        <p><strong>2.</strong> Qual das opções representa uma boa prática de segurança?</p>
+        <label><input type="radio" name="q2" value="a"> Usar a mesma senha em todos os sites</label><br>
+        <label><input type="radio" name="q2" value="b"> Compartilhar códigos de verificação quando alguém pede</label><br>
+        <label><input type="radio" name="q2" value="c"> Ativar autenticação em dois fatores sempre que possível</label>
+      </div>
+      <div class="quiz-question">
+        <p><strong>3.</strong> Ao receber uma mensagem suspeita pedindo dinheiro, você deve:</p>
+        <label><input type="radio" name="q3" value="a"> Clicar no link e seguir as instruções</label><br>
+        <label><input type="radio" name="q3" value="b"> Confirmar por outro canal oficial (ligação, app do banco) antes de qualquer ação</label><br>
+        <label><input type="radio" name="q3" value="c"> Enviar seus dados para resolver rápido</label>
+      </div>
+      <div class="quiz-question">
+        <p><strong>4.</strong> Qual é o objetivo principal de um ransomware?</p>
+        <label><input type="radio" name="q4" value="a"> Exibir propagandas na tela</label><br>
+        <label><input type="radio" name="q4" value="b"> Criptografar seus arquivos e exigir um pagamento</label><br>
+        <label><input type="radio" name="q4" value="c"> Acelerar o computador</label>
+      </div>
+      <div class="quiz-question">
+        <p><strong>5.</strong> O que é engenharia social?</p>
+        <label><input type="radio" name="q5" value="a"> Ataque que usa apenas vírus</label><br>
+        <label><input type="radio" name="q5" value="b"> Técnica de manipular pessoas para que elas mesmas revelem informações sensíveis</label><br>
+        <label><input type="radio" name="q5" value="c"> Sistema de backup em nuvem</label>
+      </div>
+      <button class="primary" onclick="corrigirQuiz()">Conferir resultado</button>
+      <div id="quiz-resultado" class="quiz-result"></div>
+    </div>
+    <div id="mensagem-conclusao" class="conclusao">
+      <strong>Parabéns!</strong> Você concluiu o curso de Conscientização Digital da Altech IT Services. Não esqueça de registrar sua participação para futuras comprovações e certificados.
     </div>
   </section>
 
   <section id="registro" style="text-align:center;">
-    <h2>Registre sua Participação</h2>
-    <p>Concluiu o curso? Registre sua presença e garanta seu certificado de participação!</p>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSchPWlO_TCKuK0ya0wSquFXBuTmD5D7GKkWQlQ08v5gQwv2cA/viewform?usp=dialog" target="_blank">
-      <button>Registrar minha participação</button>
-    </a>
+    <h2>Registre sua participação</h2>
+    <div class="section-card">
+      <p>Se você acompanhou o conteúdo e realizou o quiz, clique no botão abaixo para registrar sua presença. Esse registro pode ser utilizado para certificados e para comprovação em projetos acadêmicos.</p>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSchPWlO_TCKuK0ya0wSquFXBuTmD5D7GKkWQlQ08v5gQwv2cA/viewform?usp=dialog" target="_blank" class="btn-primary">Registrar minha participação</a>
+    </div>
   </section>
 
   <footer>
-    <p>📱 WhatsApp: (61) 98639-9258 | 📸 Instagram: <a href="https://instagram.com/it_altech" style="color:#0d6efd;">@it_altech</a></p>
+    <p>📱 WhatsApp: (61) 98639-9258 | 📸 Instagram: <a href="https://instagram.com/it_altech">@it_altech</a></p>
     <p>© 2025 Altech IT Services – Educação e Tecnologia</p>
     <p><em>Tecnologia é conhecimento. Conhecimento é proteção.</em></p>
   </footer>
 
   <button id="topBtn" title="Voltar ao topo">↑</button>
+</div>
 
-  <script>
-    const topBtn = document.getElementById('topBtn');
-    window.onscroll = function() {scrollFunction()};
-    function scrollFunction() {
-      if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-        topBtn.style.display = 'block';
-      } else {
-        topBtn.style.display = 'none';
+<script>
+  // Botão voltar ao topo
+  const topBtn = document.getElementById('topBtn');
+  window.addEventListener('scroll', () => {
+    if (document.documentElement.scrollTop > 150) {
+      topBtn.style.display = 'block';
+    } else {
+      topBtn.style.display = 'none';
+    }
+    atualizarProgresso();
+  });
+  topBtn.addEventListener('click', () => {
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  // Barra de progresso
+  function atualizarProgresso(){
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const progress = (scrollTop / scrollHeight) * 100;
+    document.getElementById('progress-bar').style.width = progress + '%';
+  }
+
+  // Correção do quiz
+  function corrigirQuiz(){
+    const respostasCorretas = {q1:'a', q2:'c', q3:'b', q4:'b', q5:'b'};
+    let total = 5;
+    let pontos = 0;
+
+    for (let q in respostasCorretas){
+      const selecionada = document.querySelector('input[name="'+q+'"]:checked');
+      if(selecionada && selecionada.value === respostasCorretas[q]){
+        pontos++;
       }
     }
-    topBtn.addEventListener('click', function(){
-      window.scrollTo({top:0, behavior:'smooth'});
-    });
-  </script>
+
+    const resultado = document.getElementById('quiz-resultado');
+    if (pontos === 0){
+      resultado.style.color = 'var(--danger)';
+      resultado.textContent = 'Você acertou 0 de 5. Que tal revisar os módulos e tentar novamente?';
+    } else if (pontos <= 2){
+      resultado.style.color = 'var(--danger)';
+      resultado.textContent = 'Você acertou '+pontos+' de 5. Atenção! Revise os conteúdos e fique mais protegido.';
+    } else if (pontos <= 4){
+      resultado.style.color = '#fde68a';
+      resultado.textContent = 'Bom! Você acertou '+pontos+' de 5. Já tem uma boa base, mas ainda dá pra melhorar.';
+    } else {
+      resultado.style.color = 'var(--accent)';
+      resultado.textContent = 'Excelente! Você acertou todas as questões. Continue praticando a segurança digital no dia a dia.';
+    }
+
+    if (pontos >= 3){
+      document.getElementById('mensagem-conclusao').style.display = 'block';
+    }
+  }
+</script>
 </body>
 </html>
