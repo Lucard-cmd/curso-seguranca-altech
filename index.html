@@ -98,15 +98,24 @@
     .threat-card h3{margin-top:0;margin-bottom:5px;font-size:1rem;}
     .threat-card span{font-size:1.4rem;margin-right:4px;}
 
-    .module-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:15px;}
-    .module-card{background:rgba(15,23,42,0.98);border-radius:18px;padding:16px 14px;border:1px solid rgba(148,163,184,0.35);font-size:0.9rem;}
-    .module-tag{font-size:0.75rem;text-transform:uppercase;letter-spacing:.12em;color:#93c5fd;margin-bottom:4px;}
-    .module-card ul{padding-left:18px;margin:6px 0;}
+    /* Accordion módulos */
+    .accordion{margin-top:10px;}
+    .accordion-item{margin-bottom:12px;border-radius:16px;background:rgba(15,23,42,0.98);border:1px solid rgba(148,163,184,0.4);overflow:hidden;}
+    .accordion-header{width:100%;background:transparent;border:none;color:#e5e7eb;text-align:left;padding:14px 16px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;}
+    .accordion-title-wrap{display:flex;flex-direction:column;gap:2px;}
+    .accordion-tag{font-size:0.7rem;text-transform:uppercase;letter-spacing:.13em;color:#93c5fd;}
+    .accordion-title{font-size:1rem;font-weight:bold;}
+    .accordion-icon{font-size:1.2rem;transition:transform .2s ease;}
+    .accordion-item.active .accordion-icon{transform:rotate(90deg);}
+    .accordion-body{max-height:0;overflow:hidden;transition:max-height .3s ease, opacity .25s ease;padding:0 16px 0;opacity:0;font-size:0.9rem;}
+    .accordion-item.active .accordion-body{max-height:800px;opacity:1;padding-bottom:14px;}
+    .accordion-body h4{margin:10px 0 4px;font-size:0.95rem;color:#e5e7eb;}
+    .accordion-body p{margin:0 0 6px;color:#d1d5db;}
 
     .quiz{background:var(--card-bg);border-radius:18px;padding:18px 16px;margin-top:10px;}
     .quiz p{margin-bottom:6px;}
     .quiz-question{margin-bottom:14px;}
-    .quiz-result{margin-top:10px;font-weight:bold;}
+    .quiz-result{margin-top:10px;font-weight:bold;white-space:pre-line;}
     .quiz small{color:#9ca3af;}
 
     #topBtn {position:fixed; bottom:20px; right:20px; background:var(--primary); color:white; border:none; border-radius:50%; width:46px; height:46px; font-size:22px; cursor:pointer; display:none; box-shadow:0 10px 25px rgba(0,0,0,0.5);} 
@@ -183,7 +192,7 @@
         </div>
         <div class="threat-card">
           <h3><span>👁️</span>Spyware & Keylogger</h3>
-          <p>Programas que espiona o que você faz no dispositivo, registrando teclas digitadas, sites acessados e até capturas de tela.</p>
+          <p>Programas que espionam o que você faz no dispositivo, registrando teclas digitadas, sites acessados e até capturas de tela.</p>
           <p><strong>Perigo:</strong> Roubo silencioso de senhas e dados bancários.</p>
         </div>
         <div class="threat-card">
@@ -208,72 +217,136 @@
   <section id="modulos">
     <h2>Módulos do curso</h2>
     <div class="section-card">
-      <div class="module-grid">
-        <div class="module-card">
-          <div class="module-tag">Módulo 1</div>
-          <h3>Fundamentos da Segurança da Informação</h3>
-          <p>Neste módulo você vai entender os conceitos básicos que sustentam toda a área de segurança.</p>
-          <ul>
-            <li>Tríade CIA: Confidencialidade, Integridade e Disponibilidade.</li>
-            <li>Diferença entre ameaça, vulnerabilidade e risco.</li>
-            <li>Exemplos práticos: vazamentos de dados famosos e seus impactos.</li>
-            <li>Por que segurança é um processo contínuo, não um produto.</li>
-          </ul>
+      <p>Clique em cada módulo para expandir e ler o conteúdo completo. Use este material como referência sempre que precisar revisar algum conceito.</p>
+      <div class="accordion">
+        <!-- Módulo 1 -->
+        <div class="accordion-item">
+          <button class="accordion-header">
+            <div class="accordion-title-wrap">
+              <span class="accordion-tag">Módulo 1</span>
+              <span class="accordion-title">Fundamentos da Segurança da Informação</span>
+            </div>
+            <span class="accordion-icon">▶</span>
+          </button>
+          <div class="accordion-body">
+            <h4>Tríade CIA</h4>
+            <p>A base da segurança da informação é a tríade CIA: <strong>Confidencialidade</strong> (apenas pessoas autorizadas acessam), <strong>Integridade</strong> (os dados permanecem corretos) e <strong>Disponibilidade</strong> (as informações estão acessíveis quando necessário).</p>
+            <p>Exemplo: quando você acessa o app do banco, espera que só você veja seu saldo (confidencialidade), que o valor exibido esteja correto (integridade) e que o serviço esteja no ar quando você precisar (disponibilidade).</p>
+            <h4>Ameaça, vulnerabilidade e risco</h4>
+            <p><strong>Ameaça</strong> é tudo que pode causar dano (um atacante, um malware, um desastre natural). <strong>Vulnerabilidade</strong> é uma fraqueza explorável (sistema desatualizado, senha fraca). <strong>Risco</strong> é a combinação da probabilidade de algo ruim acontecer com o impacto que isso teria.</p>
+            <p>Reduzir risco significa diminuir vulnerabilidades (atualizando, usando senhas fortes, fazendo backup) e estar preparado para ameaças.</p>
+            <h4>Casos reais de incidentes</h4>
+            <p>Vazamentos de dados de grandes empresas mostram como falhas de segurança podem expor milhões de pessoas. Mas pequenos negócios e usuários comuns também são alvos: um e-mail malicioso, um site falso ou um celular sem proteção já bastam para causar prejuízo.</p>
+            <h4>Segurança como processo contínuo</h4>
+            <p>Segurança não é algo que você "instala" uma vez e esquece. É um processo contínuo: revisar senhas, atualizar sistemas, desconfiar de links estranhos, fazer backups e aprender com novos golpes que surgem.</p>
+          </div>
         </div>
-        <div class="module-card">
-          <div class="module-tag">Módulo 2</div>
-          <h3>LGPD na prática</h3>
-          <p>Aqui você aprende como a Lei Geral de Proteção de Dados protege você e como ela afeta empresas e profissionais.</p>
-          <ul>
-            <li>Conceitos de dado pessoal e dado sensível.</li>
-            <li>Papéis: Titular, Controlador, Operador e Encarregado (DPO).</li>
-            <li>Direitos do titular: acesso, correção, anonimização e exclusão.</li>
-            <li>Boas práticas para pequenos negócios e autônomos.</li>
-          </ul>
+
+        <!-- Módulo 2 -->
+        <div class="accordion-item">
+          <button class="accordion-header">
+            <div class="accordion-title-wrap">
+              <span class="accordion-tag">Módulo 2</span>
+              <span class="accordion-title">LGPD na prática</span>
+            </div>
+            <span class="accordion-icon">▶</span>
+          </button>
+          <div class="accordion-body">
+            <h4>O que são dados pessoais e dados sensíveis</h4>
+            <p><strong>Dados pessoais</strong> são informações que identificam ou podem identificar uma pessoa, como nome, CPF, e-mail, telefone, endereço. <strong>Dados sensíveis</strong> são ainda mais delicados (religião, saúde, orientação sexual, opinião política) e exigem proteção redobrada.</p>
+            <h4>Papéis definidos pela LGPD</h4>
+            <p>O <strong>titular</strong> é a pessoa dona dos dados. O <strong>controlador</strong> decide como e por que os dados serão tratados (por exemplo, uma empresa). O <strong>operador</strong> executa o tratamento em nome do controlador (como um prestador de serviço). O <strong>encarregado (DPO)</strong> é o ponto de contato com os titulares e com a ANPD.</p>
+            <h4>Direitos do titular</h4>
+            <p>A LGPD garante vários direitos ao titular, como: saber quais dados estão sendo coletados, solicitar correção, pedir exclusão, revogar consentimento e portabilidade dos dados. Isso dá mais controle à pessoa sobre suas próprias informações.</p>
+            <h4>Boas práticas para empresas e autônomos</h4>
+            <p>Coletar apenas o necessário, explicar de forma clara para que os dados serão usados, armazená-los com segurança e nunca compartilhar informações sem autorização são atitudes fundamentais para cumprir a LGPD e respeitar a privacidade dos clientes.</p>
+          </div>
         </div>
-        <div class="module-card">
-          <div class="module-tag">Módulo 3</div>
-          <h3>Malwares e ciberameaças</h3>
-          <p>Um mergulho mais profundo nos agentes maliciosos que você conheceu na seção anterior.</p>
-          <ul>
-            <li>Diferenças entre vírus, worms, trojans, ransomware e spyware.</li>
-            <li>Como esses agentes chegam até você (e-mail, downloads, mídias removíveis).</li>
-            <li>Boas práticas para evitar infecções.</li>
-            <li>Importância de antivírus, firewall e atualizações.</li>
-          </ul>
+
+        <!-- Módulo 3 -->
+        <div class="accordion-item">
+          <button class="accordion-header">
+            <div class="accordion-title-wrap">
+              <span class="accordion-tag">Módulo 3</span>
+              <span class="accordion-title">Malwares e ciberameaças</span>
+            </div>
+            <span class="accordion-icon">▶</span>
+          </button>
+          <div class="accordion-body">
+            <h4>Como os malwares chegam até você</h4>
+            <p>Os malwares podem vir em anexos de e-mails, downloads em sites suspeitos, programas piratas, pendrives desconhecidos e até em links recebidos por mensagens.</p>
+            <p>Desconfiar de arquivos "milagrosos", ofertas boas demais e programas sem origem confiável já reduz muito o risco.</p>
+            <h4>Diferença entre vírus, worms e trojans</h4>
+            <p>O <strong>vírus</strong> precisa ser executado por alguém para se espalhar, o <strong>worm</strong> se auto-replica usando a rede e o <strong>trojan</strong> se disfarça de algo útil. Todos podem causar danos, mas o modo de infecção é diferente.</p>
+            <h4>Ransomware e impacto financeiro</h4>
+            <p>O <strong>ransomware</strong> se tornou um dos ataques mais perigosos hoje. Ao criptografar dados de empresas e órgãos públicos, pode parar serviços inteiros, impactar hospitais, escolas e cidadãos. O prejuízo é financeiro e social.</p>
+            <h4>Ferramentas de proteção</h4>
+            <p>Antivírus, firewalls, sistemas atualizados e bloqueio de macros em documentos são alguns exemplos de proteção. Mas a ferramenta mais importante continua sendo o usuário bem informado.</p>
+          </div>
         </div>
-        <div class="module-card">
-          <div class="module-tag">Módulo 4</div>
-          <h3>Golpes online e engenharia social</h3>
-          <p>Foco total nos golpes digitais mais comuns hoje em dia.</p>
-          <ul>
-            <li>Golpes de WhatsApp, Pix, QR Code e falsos boletos.</li>
-            <li>Como golpistas coletam informações nas redes sociais.</li>
-            <li>Mensagens com senso de urgência, medo ou recompensa fácil.</li>
-            <li>Exemplos reais e dicas para conferir links e remetentes.</li>
-          </ul>
+
+        <!-- Módulo 4 -->
+        <div class="accordion-item">
+          <button class="accordion-header">
+            <div class="accordion-title-wrap">
+              <span class="accordion-tag">Módulo 4</span>
+              <span class="accordion-title">Golpes online e engenharia social</span>
+            </div>
+            <span class="accordion-icon">▶</span>
+          </button>
+          <div class="accordion-body">
+            <h4>Golpes comuns no dia a dia</h4>
+            <p>Golpes de WhatsApp pedindo dinheiro, falsas promoções de grandes lojas, links de "rastreamento" de encomenda, boletos falsos e QR Codes adulterados são alguns exemplos que se espalham rapidamente.</p>
+            <h4>Como golpistas coletam informações</h4>
+            <p>Muitas vezes, o criminoso usa dados que a própria vítima expõe em redes sociais: nome de familiares, local de trabalho, cidade, rotina. Essas informações ajudam a criar histórias mais convincentes.</p>
+            <h4>Sinais de alerta em mensagens e links</h4>
+            <p>Pressa exagerada ("última chance"), ameaças ("sua conta será bloqueada"), pedidos de códigos de verificação e links estranhos são sinais clássicos de golpe. Sempre confirme em outro canal oficial antes de tomar qualquer atitude.</p>
+            <h4>Exemplo prático</h4>
+            <p>Se receber uma mensagem de "suporte do banco" pedindo seu código de SMS, desconfie imediatamente. Bancos reais nunca pedem senhas ou códigos por mensagem ou ligação.</p>
+          </div>
         </div>
-        <div class="module-card">
-          <div class="module-tag">Módulo 5</div>
-          <h3>Protegendo seus dispositivos e contas</h3>
-          <p>Agora é hora de colocar a mão na massa e aplicar na prática.</p>
-          <ul>
-            <li>Criação de senhas fortes e uso de gerenciadores de senha.</li>
-            <li>Autenticação em dois fatores (2FA) e por que ela é tão poderosa.</li>
-            <li>Cuidados com Wi-Fi público, Bluetooth e dispositivos desconhecidos.</li>
-            <li>Backup local e em nuvem, e quando usar cada um.</li>
-          </ul>
+
+        <!-- Módulo 5 -->
+        <div class="accordion-item">
+          <button class="accordion-header">
+            <div class="accordion-title-wrap">
+              <span class="accordion-tag">Módulo 5</span>
+              <span class="accordion-title">Protegendo seus dispositivos e contas</span>
+            </div>
+            <span class="accordion-icon">▶</span>
+          </button>
+          <div class="accordion-body">
+            <h4>Senhas fortes na prática</h4>
+            <p>Uma senha forte combina letras maiúsculas e minúsculas, números e símbolos, e não é baseada em informações óbvias como data de nascimento ou nome de familiares.</p>
+            <p>Exemplo de senha fraca: <em>joao123</em>. Exemplo de senha mais forte: <em>J0@o_2024!</em> (e, de preferência, única para cada serviço).</p>
+            <h4>Gerenciadores de senha</h4>
+            <p>Gerenciadores como Bitwarden, 1Password ou outros permitem guardar todas as suas senhas de forma segura, usando apenas uma senha mestra forte. Isso ajuda a evitar repetir senhas em vários sites.</p>
+            <h4>Autenticação em dois fatores (2FA)</h4>
+            <p>Com a 2FA ativada, mesmo que alguém descubra sua senha, ainda precisará de um segundo código (enviado por SMS, app autenticador ou token) para entrar. É uma das formas mais eficientes de aumentar a segurança.</p>
+            <h4>Cuidados com redes e dispositivos</h4>
+            <p>Evite acessar contas sensíveis em redes Wi‑Fi públicas, mantenha o Bluetooth desligado quando não estiver usando e não conecte pendrives desconhecidos no seu computador.</p>
+          </div>
         </div>
-        <div class="module-card">
-          <div class="module-tag">Módulo 6</div>
-          <h3>Responsabilidade e ética digital</h3>
-          <p>Segurança também é sobre como você se comporta no ambiente digital.</p>
-          <ul>
-            <li>Fake news, exposição indevida e discurso de ódio.</li>
-            <li>Proteção de crianças e adolescentes no ambiente online.</li>
-            <li>Boas práticas ao compartilhar conteúdo e dados de terceiros.</li>
-            <li>Como agir em caso de golpe ou vazamento de dados.</li>
-          </ul>
+
+        <!-- Módulo 6 -->
+        <div class="accordion-item">
+          <button class="accordion-header">
+            <div class="accordion-title-wrap">
+              <span class="accordion-tag">Módulo 6</span>
+              <span class="accordion-title">Responsabilidade e ética digital</span>
+            </div>
+            <span class="accordion-icon">▶</span>
+          </button>
+          <div class="accordion-body">
+            <h4>Impacto do que você compartilha</h4>
+            <p>Cada curtida, comentário e compartilhamento ajuda a espalhar informação — verdadeira ou falsa. Verificar a fonte antes de repassar uma notícia é uma atitude de responsabilidade digital.</p>
+            <h4>Privacidade de terceiros</h4>
+            <p>Publicar fotos, conversas privadas ou dados de outras pessoas sem autorização pode causar danos à imagem e até gerar problemas legais. Respeitar a privacidade alheia é parte da ética digital.</p>
+            <h4>Proteção de crianças e adolescentes</h4>
+            <p>Crianças e jovens são alvos fáceis em jogos online, redes sociais e chats. Acompanhar, orientar e configurar filtros de conteúdo ajuda a construir um ambiente digital mais seguro para eles.</p>
+            <h4>Como agir em caso de golpe</h4>
+            <p>Se cair em um golpe, procure imediatamente o banco ou serviço envolvido, troque senhas, ative 2FA, registre boletim de ocorrência e, se possível, alerte outras pessoas para que não sejam vítimas do mesmo golpe.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -390,6 +463,21 @@
     document.getElementById('progress-bar').style.width = progress + '%';
   }
 
+  // Accordion módulos
+  document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.accordion-item');
+    items.forEach(item => {
+      const header = item.querySelector('.accordion-header');
+      header.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        // Fecha todos
+        items.forEach(i => i.classList.remove('active'));
+        // Se não estava ativo, abre
+        if (!isActive) item.classList.add('active');
+      });
+    });
+  });
+
   // Correção do quiz
   function corrigirQuiz(){
     const respostasCorretas = {
@@ -436,7 +524,7 @@
       resultado.textContent = 'Você acertou 0 de ' + total + '. Que tal revisar os módulos e tentar novamente?';
     } else if (pontos <= 4){
       resultado.style.color = 'var(--danger)';
-      resultado.textContent = 'Você acertou ' + pontos + ' de ' + total + '. Ainda há pontos importantes para revisar.' + feedbackDetalhado;
+      resultado.textContent = 'Você acertou ' + pontos + ' de ' + total + '. Ainda há pontos importantes para revisar:' + feedbackDetalhado;
     } else if (pontos <= 7){
       resultado.style.color = 'var(--warn)';
       resultado.textContent = 'Bom! Você acertou ' + pontos + ' de ' + total + '. Revise principalmente as questões em que errou:' + feedbackDetalhado;
